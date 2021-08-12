@@ -24,17 +24,20 @@ const twentyFiveBtn = document.getElementById("twentyFive-btn");
 const fiftyBtn = document.getElementById("fifty-btn");
 const clearBtn = document.getElementById("clear-btn");
 const doubleBtn = document.getElementById("double-btn");
+const submitNameBtn = document.getElementById("submit-btn");
+const playerNameEl = document.getElementById("enterPname-el");
 
 let pAces = 0;
 let dAces = 0;
 
 let player = {
   name: "Suk",
-  chips: 145,
+  chips: 500,
 };
 
 let playerEl = document.getElementById("player-el");
-playerEl.textContent = player.name + ": $" + player.chips;
+playerEl.textContent = playerName();
+//playerEl.textContent = player.name + ": $" + player.chips;
 
 function getRandomCard() {
   return Math.floor(Math.random() * 10) + 2;
@@ -89,7 +92,8 @@ function renderGame() {
     payOut();
   } else if (pSum < 22) {
     message = "Do you want to draw another card?";
-  } else if (pSum === 22 && pCards.length === 2) {
+  } else if (pAces === 2) {
+    message = "Do you want to draw another card?";
   } else {
     message = "You've busted!!!";
     payOut();
@@ -354,11 +358,23 @@ function doubleDown() {
 
 doubleBtn.addEventListener("click", doubleDown);
 
+submitNameBtn.addEventListener("click", playerName);
+
 function printCards(element, name, array) {
   element.textContent = `${name} Cards: `;
   for (let i = 0; i < array.length; i++) {
     element.textContent += array[i] + " ";
   }
+}
+
+function playerName() {
+  playerEl.textContent = `${playerNameEl.value}: $${player.chips}`;
+  playerNameEl.value = "";
+  //setVisibility("playerName-el", "none");
+}
+
+function setVisibility(id, visibility) {
+  document.getElementById(id).style.display = visibility;
 }
 
 /*
