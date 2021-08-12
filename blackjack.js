@@ -87,8 +87,9 @@ function renderGame() {
     message = "You've got blackjack!!!";
     hasBlackJack = true;
     payOut();
-  } else if (pSum < 22 || pCards.length === 2) {
+  } else if (pSum < 22) {
     message = "Do you want to draw another card?";
+  } else if (pSum === 22 && pCards.length === 2) {
   } else {
     message = "You've busted!!!";
     payOut();
