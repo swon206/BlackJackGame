@@ -41,17 +41,22 @@ button {
   width: 50px;
 }
 
-#wager {
+/*#wager {
   position: fixed;
   top: 50px;
   left: 100px;
+}*/
+
+#wager {
+  position: absolute;
+  top: 5%;
+  left: 10%;
 }
 
-/*#totalWager {
-  position: fixed;
-  top: 230px;
-  left: 100px;
-}*/
+#totalWager {
+  margin-top: none;
+  text-align: left;
+}
 
 #one-btn {
   margin-top: 5px;
