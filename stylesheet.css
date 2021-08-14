@@ -58,12 +58,11 @@ button {
 }
 
 #playerName-el {
-  display: flex;
   align-items: center;
   background: lightgray;
   margin: auto;
   width: 300px;
-  height: 200px;
+  height: 100px;
 }
 
 #playerName-btn {
@@ -77,4 +76,12 @@ button {
   border-radius: 20px;
   background: black;
   color: white;
+  width: 100px;
+}
+
+#player-el {
+  color: black;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px red;
 }

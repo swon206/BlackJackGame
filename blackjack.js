@@ -25,23 +25,26 @@ const fiftyBtn = document.getElementById("fifty-btn");
 const clearBtn = document.getElementById("clear-btn");
 const doubleBtn = document.getElementById("double-btn");
 const submitNameBtn = document.getElementById("submit-btn");
-const playerNameEl = document.getElementById("enterPname-el");
+const inputEl = document.getElementById("input-el");
+const playerEl = document.getElementById("player-el");
 
 let pAces = 0;
 let dAces = 0;
 
-let player = {
-  name: "Suk",
-  chips: 500,
-};
-
-let playerEl = document.getElementById("player-el");
-playerEl.textContent = playerName();
-//playerEl.textContent = player.name + ": $" + player.chips;
+class Player {
+  constructor(name, chips) {
+    this.name = name;
+    this.chips = chips;
+  }
+}
 
 function getRandomCard() {
   return Math.floor(Math.random() * 10) + 2;
 }
+
+/*let player1 = function getRandomCard() {
+  return Math.floor(Math.random() * 10) + 2;
+};*/
 
 function startGame() {
   pAces = 0;
@@ -53,8 +56,8 @@ function startGame() {
   doubleBet = true;
   payOutPlayer = true;
 
-  if (wager > player.chips) {
-    wager = player.chips;
+  if (wager > player1.chips) {
+    wager = player1.chips;
     ttlWagerEl.textContent = `Total Wager: $${wager}`;
   }
 
@@ -168,6 +171,10 @@ function stand() {
   if (dealerAlive) {
     let index = 0;
     dAces = countAces(dCards);
+    if (dAces === 2) {
+      dCards[0] = 1;
+      dAces--;
+    }
     dSum = dCards[0] + dCards[1];
     dCardsEl.textContent = `Dealer Cards: ${dCards[0]} ${dCards[1]} `;
     dSumEl.textContent = `Dealer Sum: ${dSum}`;
@@ -265,7 +272,7 @@ function stand() {
   } */
 
 oneBtn.addEventListener("click", function () {
-  if (liveBet && player.chips - wager >= 1) {
+  if (liveBet && player1.chips - wager >= 1) {
     wager += 1;
     ttlWagerEl.textContent = `Total Wager: $${wager}`;
   } else if (liveBet) {
@@ -274,7 +281,7 @@ oneBtn.addEventListener("click", function () {
 });
 
 fiveBtn.addEventListener("click", function () {
-  if (liveBet && player.chips - wager >= 5) {
+  if (liveBet && player1.chips - wager >= 5) {
     wager += 5;
     ttlWagerEl.textContent = `Total Wager: $${wager}`;
   } else if (liveBet) {
@@ -283,7 +290,7 @@ fiveBtn.addEventListener("click", function () {
 });
 
 twentyFiveBtn.addEventListener("click", function () {
-  if (liveBet && player.chips - wager >= 25) {
+  if (liveBet && player1.chips - wager >= 25) {
     wager += 25;
     ttlWagerEl.textContent = `Total Wager: $${wager}`;
   } else if (liveBet) {
@@ -292,7 +299,7 @@ twentyFiveBtn.addEventListener("click", function () {
 });
 
 fiftyBtn.addEventListener("click", function () {
-  if (liveBet && player.chips - wager >= 50) {
+  if (liveBet && player1.chips - wager >= 50) {
     wager += 50;
     ttlWagerEl.textContent = `Total Wager: $${wager}`;
   } else if (liveBet) {
@@ -310,30 +317,30 @@ clearBtn.addEventListener("click", function () {
 function payOut() {
   if (payOutPlayer) {
     if (hasBlackJack) {
-      player.chips += wager * 1.5;
-      playerEl.textContent = player.name + ": $" + player.chips;
+      player1.chips += wager * 1.5;
+      playerEl.textContent = player1.name + ": $" + player1.chips;
       //wager = 0;
       ttlWagerEl.textContent = `Total Wager: $${wager}`;
       message = "You've got blackjack!!!";
     } else if (pSum > dSum && pSum < 22) {
-      player.chips += wager;
-      playerEl.textContent = player.name + ": $" + player.chips;
+      player1.chips += wager;
+      playerEl.textContent = player1.name + ": $" + player1.chips;
       // wager = 0;
       ttlWagerEl.textContent = `Total Wager: $${wager}`;
       message = "You've got a winning hand!";
     } else if (pSum === dSum) {
-      playerEl.textContent = player.name + ": $" + player.chips;
+      playerEl.textContent = player1.name + ": $" + player1.chips;
       // wager = 0;
       ttlWagerEl.textContent = `Total Wager: $${wager}`;
       message = "It's a draw";
     } else if (pSum < dSum && dSum > 21) {
-      player.chips += wager;
-      playerEl.textContent = player.name + ": $" + player.chips;
+      player1.chips += wager;
+      playerEl.textContent = player1.name + ": $" + player1.chips;
       ttlWagerEl.textContent = `Total Wager: $${wager}`;
       message = "You've got a winning hand!";
     } else {
-      player.chips -= wager;
-      playerEl.textContent = player.name + ": $" + player.chips;
+      player1.chips -= wager;
+      playerEl.textContent = player1.name + ": $" + player1.chips;
       //  wager = 0;
       ttlWagerEl.textContent = `Total Wager: $${wager}`;
       message = "You have a losing hand, try again";
@@ -348,7 +355,7 @@ function payOut() {
 }
 
 function doubleDown() {
-  if (doubleBet === true && player.chips > wager * 2) {
+  if (doubleBet === true && player1.chips > wager * 2) {
     wager += wager;
     ttlWagerEl.textContent = `Total Wager: $${wager}`;
     newCard();
@@ -358,7 +365,12 @@ function doubleDown() {
 
 doubleBtn.addEventListener("click", doubleDown);
 
-submitNameBtn.addEventListener("click", playerName);
+submitNameBtn.addEventListener("click", function () {
+  let pName = inputEl.value;
+  player1 = new Player(pName, 500);
+  playerEl.textContent = `${player1.name}: $${player1.chips}`;
+  document.getElementById("playerName-el").style.visibility = "hidden";
+});
 
 function printCards(element, name, array) {
   element.textContent = `${name} Cards: `;
@@ -367,11 +379,16 @@ function printCards(element, name, array) {
   }
 }
 
-function playerName() {
-  playerEl.textContent = `${playerNameEl.value}: $${player.chips}`;
-  playerNameEl.value = "";
+function getPlayerName() {
+  const pName = inputEl.value;
+
+  let player1 = new Player(pName, 500);
+  playerEl.textContent = `${player1.name}: $${player1.chips}`;
+  //document.getElementById("playerName-el").style.visibility = "visible";
   //setVisibility("playerName-el", "none");
 }
+
+//playerEl.textContent = `${player1.name}: $${player1.chips}`;
 
 function setVisibility(id, visibility) {
   document.getElementById(id).style.display = visibility;
