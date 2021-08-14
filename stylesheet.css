@@ -42,16 +42,16 @@ button {
 }
 
 #wager {
-  position: fixed;
-  top: 50px;
-  left: 100px;
+  position: relative;
+  top: -300px;
+  left: -575px;
 }
 
-#totalWager {
+/*#totalWager {
   position: fixed;
   top: 230px;
   left: 100px;
-}
+}*/
 
 #one-btn {
   margin-top: 5px;
@@ -83,5 +83,5 @@ button {
   color: black;
   font-size: 2rem;
   font-weight: bold;
-  text-shadow: 2px 2px red;
+  text-shadow: 2px 2px goldenrod;
 }
