@@ -42,9 +42,9 @@ button {
 }
 
 #wager {
-  position: relative;
-  top: -300px;
-  left: -575px;
+  position: fixed;
+  top: 50px;
+  left: 100px;
 }
 
 /*#totalWager {
