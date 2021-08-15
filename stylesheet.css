@@ -41,15 +41,9 @@ button {
   width: 50px;
 }
 
-/*#wager {
-  position: fixed;
-  top: 50px;
-  left: 100px;
-}*/
-
 #wager {
-  position: fixed;
-  top: 5%;
+  position: absolute;
+  top: 10%;
   left: 10%;
 }
 
