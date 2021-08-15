@@ -42,9 +42,9 @@ button {
 }
 
 #wager {
-  position: absolute;
+  position: fixed;
   top: 10%;
-  left: 10%;
+  left: 8%;
 }
 
 #totalWager {
