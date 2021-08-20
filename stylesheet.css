@@ -84,3 +84,29 @@ button {
   font-weight: bold;
   text-shadow: 2px 2px goldenrod;
 }
+
+p {
+  list-style: none;
+}
+
+button:active {
+  background: rgb(252, 132, 3);
+}
+
+#dCards-el {
+  color: red;
+  text-shadow: 2px 1px black;
+}
+
+#pCards-el {
+  color: white;
+  text-shadow: 2px 1px black;
+}
+
+#submit-btn:active {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#inputName-el {
+  color: black;
+}
